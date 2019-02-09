@@ -1,0 +1,20 @@
+{
+  "name": "wdio-stacktraces",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "wdio wdio.conf.js"
+  },
+  "keywords": [],
+  "author": "Martin Olsson <martin@minimum.se> (https://mo.github.io)",
+  "license": "ISC",
+  "devDependencies": {
+    "@wdio/cli": "^5.15.6",
+    "@wdio/jasmine-framework": "^5.15.1",
+    "@wdio/local-runner": "^5.15.6",
+    "@wdio/selenium-standalone-service": "^5.15.0",
+    "@wdio/spec-reporter": "^5.15.2",
+    "@wdio/sync": "^5.15.7"
+  }
+}
