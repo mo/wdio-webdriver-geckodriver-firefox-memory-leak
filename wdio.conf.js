@@ -30,7 +30,7 @@ exports.config = {
   exclude: [
   ],
 
-  maxInstances: Number(process.env.EE_BROWSER_COUNT) || 4,
+  maxInstances: Number(process.env.EE_BROWSER_COUNT) || 1,
 
 
   // ===================
