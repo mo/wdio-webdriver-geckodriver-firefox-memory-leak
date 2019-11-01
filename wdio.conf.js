@@ -38,16 +38,8 @@ exports.config = {
   // ===================
   // Define all options that are relevant for the WebdriverIO instance here
   //
-  // By default WebdriverIO commands are executed in a synchronous way using
-  // the wdio-sync package. If you still want to run your tests in an async way
-  // e.g. using promises you can set the sync option to false.
-  sync: true,
-  //
   // Level of logging verbosity: silent | verbose | command | data | result | error
   logLevel: process.env.EE_LOG_LEVEL || 'error',
-  //
-  // Enables colors for log output.
-  coloredLogs: true,
   //
   // If you only want to run your tests until a specific amount of tests have failed use
   // bail (default is 0 - don't bail, run all tests).
@@ -130,38 +122,9 @@ exports.config = {
 
 exports.config.capabilities = [
   {
-    browserName: 'chrome',
-    'goog:chromeOptions': {
-    }
-  },
-  {
     browserName: 'firefox',
     'moz:firefoxOptions': {
-      binary: process.env.EE_FIREFOX_BINARY,
-      prefs: {
-        'app.update.auto': false,
-        'app.update.enabled': false,
-        // Set "browser.anchor_color" to verify the prefs are applied correctly or not.
-        //'browser.anchor_color': '#FF0000',
-      },
+      args: ['-headless', '--window-size=1280']
     },
   }
 ]
-
-if (!process.env.EE_HEADLESS || process.env.EE_HEADLESS != '0') {
-  const chromeCapability = exports.config.capabilities.find(conf => conf.browserName === 'chrome')
-  chromeCapability['goog:chromeOptions'].args = ['--headless', '--disable-gpu', '--window-size=1280,800']
-
-  const firefoxCapability = exports.config.capabilities.find(conf => conf.browserName === 'firefox')
-  firefoxCapability['moz:firefoxOptions'].args = ['-headless', '--window-size=1280,800']
-}
-
-if (process.env.SELENIUM_BROWSER) {
-  exports.config.capabilities = exports.config.capabilities.filter(conf => conf.browserName === process.env.SELENIUM_BROWSER)
-} else {
-  exports.config.capabilities = exports.config.capabilities.filter(conf => conf.browserName === "firefox")
-}
-
-if (process.env.EE_WDIO_EXEC_ARGV) {
-  exports.config.execArgv = [process.env.EE_WDIO_EXEC_ARGV]
-}
